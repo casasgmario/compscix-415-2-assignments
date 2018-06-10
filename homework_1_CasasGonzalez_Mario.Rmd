@@ -9,6 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
+
 QUESTION 1: 
 
 There are 23,018 observations and 10 variables on the WorldCities dataset.
@@ -28,12 +30,20 @@ QUESTION 3: Unique entries from the country column:
 1        AD
 
 3        AE
+
 15       AF
+
 65       AG
+
 66       AI
+
 67       AL
+
 87       AM
+
 104      AO
+
 131      AR
+
  
 WorldCities %>% ggplot(aes(x=population)) + geom_histogram()
