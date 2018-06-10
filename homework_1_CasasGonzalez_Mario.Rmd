@@ -1,0 +1,25 @@
+---
+title: "COMPSCIX 415.2 Homework 1"
+author: "Mario Casas Gonzalez"
+date: "June 9, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+QUESTION 1: 
+
+There are 23,018 observations and 10 variables on the WorldCities dataset.
+
+QUESTION 2: Unique regions in the dataset:
+
+"Europe/Andorra"                 "Asia/Dubai"                    
+"Asia/Kabul"                     "America/Antigua"               
+"America/Anguilla"               "Europe/Tirane"                 
+"Asia/Yerevan"                   "Africa/Luanda"                 
+"America/Argentina/Buenos_Aires" "America/Argentina/Cordoba"     
+"America/Argentina/Salta"        "America/Argentina/Tucuman"     
+"America/Argentina/San_Juan"    
