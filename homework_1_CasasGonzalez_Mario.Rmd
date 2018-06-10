@@ -5,15 +5,13 @@ date: "June 9, 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
+
 
 My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
 
 QUESTION 1: 
 
-There are 23,018 observations and 10 variables on the WorldCities dataset.
+There are 23,018 observations and 10 variables on the WorldCities dataset.Some of the variable names are Name, Longitude, Latitude, country region, population... 
 
 QUESTION 2: Unique regions in the dataset:
 
@@ -45,5 +43,10 @@ QUESTION 3: Unique entries from the country column:
 
 131      AR
 
- 
-WorldCities %>% ggplot(aes(x=population)) + geom_histogram()
+Question 4 : Plot generated
+
+
+
+
+
+
