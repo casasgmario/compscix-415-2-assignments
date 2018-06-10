@@ -42,3 +42,36 @@ Question 2 - Unique region values extracted:
 [13] "America/Argentina/San_Juan"   
 
 
+```{r Extract Data the tidy way}
+country_col <- select(WorldCities, country)
+country_col <- WorldCities %>% select(country)
+WorldCities %>% select(country) %>% unique()
+
+```
+
+Question 3 - Unique country codes extracted:
+
+1        AD
+3        AE
+15       AF
+65       AG
+66       AI
+67       AL
+87       AM
+104      AO
+131      AR
+
+```{r Visualize it}
+
+WorldCities %>% ggplot(aes(x = population)) + geom_histogram()
+WorldCities %>% ggplot(aes(x = population)) + geom_histogram() + xlab('City Population')
+WorldCities %>% ggplot(aes(x = population)) + geom_histogram() + 
+  xlab('# People') + ylab ('# Cities') + ggtitle('My Question 4 Histogram')
+
+
+```
+
+
+QUestion 4 - plot generated above
+
+
