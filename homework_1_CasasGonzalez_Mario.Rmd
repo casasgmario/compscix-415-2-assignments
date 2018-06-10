@@ -5,48 +5,40 @@ date: "June 9, 2018"
 output: html_document
 ---
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
 My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
 
-QUESTION 1: 
+```{r load_packages, warning=FALSE, message=FALSE}
+library(mdsr)
+library(tidyverse)
+data("WorldCities")
+glimpse(WorldCities)
+```
 
-There are 23,018 observations and 10 variables on the WorldCities dataset.Some of the variable names are Name, Longitude, Latitude, country region, population... 
-
-QUESTION 2: Unique regions in the dataset:
-
-"Europe/Andorra"                 "Asia/Dubai"                    
-"Asia/Kabul"                     "America/Antigua"               
-"America/Anguilla"               "Europe/Tirane"                 
-"Asia/Yerevan"                   "Africa/Luanda"                 
-"America/Argentina/Buenos_Aires" "America/Argentina/Cordoba"     
-"America/Argentina/Salta"        "America/Argentina/Tucuman"     
-"America/Argentina/San_Juan"    
-
-QUESTION 3: Unique entries from the country column:
-
-1        AD
-
-3        AE
-
-15       AF
-
-65       AG
-
-66       AI
-
-67       AL
-
-87       AM
-
-104      AO
-
-131      AR
-
-Question 4 : Plot generated
+Question 1 - Ther is 23018 observations of 10 variables, some of the variables are longitude, latitude, population, etc. 
 
 
+```{r Extract Parts of the data}
+View (WorldCities)
+WorldCities <- head(WorldCities, 200) # 200 rows
+country_col <- WorldCities$country
+unique(country_col)
+country_reg <- WorldCities$region
+unique(country_reg)
+```
 
 
+Question 2 - Unique region values extracted: 
+
+ [1] "Europe/Andorra"                 "Asia/Dubai"                    
+ [3] "Asia/Kabul"                     "America/Antigua"               
+ [5] "America/Anguilla"               "Europe/Tirane"                 
+ [7] "Asia/Yerevan"                   "Africa/Luanda"                 
+ [9] "America/Argentina/Buenos_Aires" "America/Argentina/Cordoba"     
+[11] "America/Argentina/Salta"        "America/Argentina/Tucuman"     
+[13] "America/Argentina/San_Juan"   
 
 
