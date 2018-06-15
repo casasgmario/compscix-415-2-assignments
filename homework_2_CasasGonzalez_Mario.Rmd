@@ -1,0 +1,58 @@
+---
+title: "Homework-Week-2"
+author: "Mario Casas Gonzalez"
+date: "June 15, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+
+Exercises
+
+1. Run ggplot(data = mpg). What do you see?:
+
+```{r 3.2.4 Exercise 1, include=FALSE, warning=FALSE, message=FALSE}
+library (tidyverse)
+library (mdsr)
+ggplot(data = mpg)
+
+```
+
+
+2. How many rows are in mpg? How many columns? >> 234 rows (Observations), 11 columns (Variables)
+
+```{r 3.2.4 Exercise 2, include=FALSE, warning=FALSE, message=FALSE}
+
+View (mpg)
+
+```
+
+3. What does the drv variable describe? Read the help for ?mpg to find out. >> It's a variable to determine the type of car i.e. f = front-wheel drive, r = rear wheel drive, 4 = 4wd
+
+
+```{r 3.2.4 Exercise 3, include=FALSE, warning=FALSE, message=FALSE}
+
+?mpg
+
+```
+
+4. Make a scatterplot of hwy vs cyl.
+
+
+```{r 3.2.4 Exercise 4, include=FALSE, warning=FALSE, message=FALSE}
+
+?mpg
+
+```
+
+5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful?
+
+
+```{r 3.2.4 Exercise 5, include=FALSE, warning=FALSE, message=FALSE}
+
+?mpg
+
+```
