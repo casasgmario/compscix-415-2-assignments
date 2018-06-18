@@ -51,7 +51,7 @@ Q3> What does the drv variable describe? Read the help for ?mpg to find out.
 
 ```{r 3.2.4 Exercise 4, include=TRUE, warning=FALSE, message=FALSE}
 
-ggplot (dat = mpg) + geom_point(mapping=aes(x=hwy,y=cyl))
+ggplot (dat = mpg) + geom_point(mapping=aes(x=cyl,y=hwy))
 
 
 ```
@@ -110,7 +110,7 @@ ggplot (dat = mpg) + geom_point(mapping=aes(x=cyl, y=hwy, color=displ, size=disp
 
 Q5> What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)? 
 
->> Thestroke aesthetic modifies the width of the shape border. It works with numeric arguments.  
+>> The stroke aesthetic modifies the width of the shape border. It works with numeric arguments.  
 
 ```{r 3.3.1 Question 5, include=TRUE, warning=FALSE, message=FALSE}
 
@@ -193,21 +193,47 @@ geom_smooth(se = FALSE)
 
 ```
 
+Exercise #4 What does the se argument to geom_smooth() do?
+
+>> It displays confidence interval around smooth, as explained in the ?geom_smooth help command. 
+
+Exercise #5 Will these two graphs look different? Why/why not?
+
+>> They look the same because geom_point and geom_smooth both inherit the attributes of the ggplot. 
+
+```{r 3.6.1 Exercise 5, include=TRUE, warning=FALSE, message=FALSE}
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point() + 
+  geom_smooth()
+
+ggplot() + 
+  geom_point(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_smooth(data = mpg, mapping = aes(x = displ, y = hwy))
+
+```
+
+
+Exercise #6 Recreate the R code necessary to generate the following graphs.
+
+
 Section 3.7.1 
 
 Exercise #2 What does geom_col() do? How is it different to geom_bar()?
 
 >> 'geom_col()' generates a bar chart where the heights of the bars represent values in the data. 'geom_bar()' makes the height of the bar proportional to the number of cases or the sum of the weights in each group.  
 
+Final Question - Look at the data graphics at the following link: What is a Data Scientist. Please briefly critique the designer’s choices. What works? What doesn’t work? What would you have done differently? 
+
+The designer uses a combination of pie charts, histograms and bubbles, somewhat lacking consistency for the reader. 
+
+In my view the information given on the pie charts e.g. % of Data Scientist Demand may have a better visual impact through a histogram. Also the colour code should have been included in the legend. 
+
+Colour coding in general could be improved, as an example the 3rd section seems to imply a darker blue means a higher % but there is no legend to show that. 
+
+The multiple panels on the 4th section could be replaced fro a more compact view through single panel with colour coding. Same applies to the second to the last plot. 
+
+The last section shows all % figures with the same height. I would have weighted the height based on % for better visualization.   
 
 
-
-
-Look at the data graphics at the following link: What is a Data Scientist. Please briefly critique the designer’s choices. What works? What doesn’t work? What would you have done differently? 
-
-```{r 3.3.1 Exercise 5, include=TRUE, warning=FALSE, message=FALSE}
-
-
-
-```
 
