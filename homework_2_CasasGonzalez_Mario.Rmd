@@ -10,9 +10,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```
 
-Exercises
+Section 3.2.4 - All Exercises
 
-1. Run ggplot(data = mpg). What do you see?:
+Q1> Run ggplot(data = mpg). What do you see?. 
+
+>> No plot is shown. 
 
 ```{r 3.2.4 Exercise 1, include=TRUE, warning=FALSE, message=FALSE}
 library (tidyverse)
@@ -22,7 +24,9 @@ ggplot(data = mpg)
 ```
 
 
-2. How many rows are in mpg? How many columns? >> 234 rows (Observations), 11 columns (Variables)
+Q2> How many rows are in mpg? How many columns? 
+
+>> 234 rows (Observations), 11 columns (Variables)
 
 ```{r 3.2.4 Exercise 2, include=TRUE, warning=FALSE, message=FALSE}
 
@@ -30,7 +34,10 @@ View (mpg)
 
 ```
 
-3. What does the drv variable describe? Read the help for ?mpg to find out. >> It's a variable to determine the type of car i.e. f = front-wheel drive, r = rear wheel drive, 4 = 4wd
+Q3> What does the drv variable describe? Read the help for ?mpg to find out. 
+
+>> It's a variable to determine the type of car i.e. f = front-wheel drive, r = rear wheel drive, 4 = 4wd
+
 
 
 ```{r 3.2.4 Exercise 3, include=TRUE, warning=FALSE, message=FALSE}
@@ -49,7 +56,9 @@ ggplot (dat = mpg) + geom_point(mapping=aes(x=hwy,y=cyl))
 
 ```
 
-5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful? >> Because 
+Q5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful? 
+
+>> Because the same information is better represented through a table rather than a plot. 
 
 
 ```{r 3.2.4 Exercise 5, include=TRUE, warning=FALSE, message=FALSE}
@@ -59,7 +68,7 @@ ggplot (dat = mpg) + geom_point(mapping=aes(x=class,y=drv))
 
 ```
 
-3.3.1 
+Section 3.3.1 All Exercises 
 
 Q1> What's wrong with this code? Why are the points not blue? >> Because in order to set an aesthetic, you have to set it by name as an argument of the geom function and outside of the aes() 
 
@@ -79,7 +88,7 @@ You can tell by looking at the description of the variables and associated value
 
 Q3> Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables? 
 
-You cannot map a continuous variable to shape. 
+You cannot map a continuous variable to "shape", which is intended to represent categorical variables.  
 
 
 ```{r 3.3.1 Question 3, include=TRUE, warning=FALSE, message=FALSE}
@@ -99,16 +108,98 @@ ggplot (dat = mpg) + geom_point(mapping=aes(x=cyl, y=hwy, color=displ, size=disp
 
 ```
 
-Q5> What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)
+Q5> What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)? 
+
+>> Thestroke aesthetic modifies the width of the shape border. It works with numeric arguments.  
 
 ```{r 3.3.1 Question 5, include=TRUE, warning=FALSE, message=FALSE}
 
+ggplot (dat = mpg) + geom_point(mapping=aes(x=hwy, y=class))
+ggplot (dat = mpg) + geom_point(mapping=aes(x=hwy, y=class, stroke=cyl))
+
+```
+
+
+Q6> What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ < 5)?
+
+>> What happens is the aesthetic displays a binary value (in this case orange or blue) as a result of evaluating the condition.   
+
+```{r 3.3.1 Question 6, include=TRUE, warning=FALSE, message=FALSE}
+
+ggplot (dat = mpg) + geom_point(mapping=aes(x=hwy, y=class, colour=displ<5))
 
 
 ```
 
 
-What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ < 5)?
+Section 3.5.1: Exercises #4 and #5 only
+
+Exercise #4 > What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?
+
+>> The advantages include having a better visual representation and screen space usage of how the first 2 variables behave as we change the third variable for comparison purposes, in this case the car class. The disadvantages include having multiple panels to extract insights. As the dataset grows, the number of panels generated through faceting may become unmanageable. 
+
+```{r 3.5.1 Exercise #4, include=FALSE, warning=FALSE, message=FALSE}
+
+ggplot (dat = mpg) + geom_point(mapping=aes(x=displ, y=hwy)) + facet_wrap(~ class, nrow = 2)
+
+```
+
+Exercise #5 > Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol argument?
+
+>> 'nrow' is an argument that determines the number of rows wher the various panels get represented. 'ncol' determines the number of columns for the same purpose. 'facet_grid' forms a matrix of panels defined by row and column facetting variables, all on a single row of panels hence 'nrow' and 'ncol' are not required. 
+
+```{r 3.5.1 Exercise 5, include=TRUE, warning=FALSE, message=FALSE}
+
+ggplot (dat = mpg) + geom_point(mapping=aes(x=displ, y=hwy)) + facet_grid(~ class)
+
+```
+
+
+Section 3.6.1: #1-5. Extra Credit: Do #6
+
+Exercise #1 What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?
+
+>> 'Geom_Smooth' for a Line chart.  'geom_boxplot' for a boxplot. 'geom_histogram' for a histogram. 
+
+```{r 3.6.1 Exercise 1, include=TRUE, warning=FALSE, message=FALSE}
+
+ggplot (data = mpg) + geom_smooth(mapping=aes(x=displ, y=hwy, linetype = "drv"))
+
+
+```
+
+
+Exercise #2 Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.
+
+```{r 3.6.1 Exercise 2, include=TRUE, warning=FALSE, message=FALSE}
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) + 
+geom_point() + 
+geom_smooth(se = FALSE)
+
+```
+
+
+Exercise #3 What does show.legend = FALSE do? What happens if you remove it?
+Why do you think I used it earlier in the chapter?
+
+>> It should remove the legend from the side of the plot. If you remove it then it should show the legend again. You used earlier for consistency with the 2 other panels shown on that particular plot.  
+
+```{r 3.6.1 Exercise 3, include=TRUE, warning=FALSE, message=FALSE}
+
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv), show.legend = FALSE) + 
+geom_point() + 
+geom_smooth(se = FALSE)
+
+```
+
+Section 3.7.1 
+
+Exercise #2 What does geom_col() do? How is it different to geom_bar()?
+
+>> 'geom_col()' generates a bar chart where the heights of the bars represent values in the data. 'geom_bar()' makes the height of the bar proportional to the number of cases or the sum of the weights in each group.  
+
+
 
 
 
@@ -116,7 +207,6 @@ Look at the data graphics at the following link: What is a Data Scientist. Pleas
 
 ```{r 3.3.1 Exercise 5, include=TRUE, warning=FALSE, message=FALSE}
 
-ggplot (dat = mpg) + geom_point(mapping=aes(x=class,y=drv))
 
 
 ```
