@@ -60,4 +60,82 @@ ggplot (data=mpg, mapping= aes (x=cty, y = hwy)) + geom_point() + geom_count()
 
 Question 4 - What's the default position for geom_boxplot()? Create a visualisation of the mpg dataset that demonstrate it. 
 
+>> The default position is Identity. 
+
+```{r Section 3.8.1 Question 4}
+
+ggplot (data=mpg) + geom_boxplot(mapping = aes (x=class, y=hwy))
+
+```
+
+
+SECTION 3.9.1 
+
+Exercise #2 - What does "labs()" do?. Read the documentation. 
+
+>> Labs() allows you to set axis labels as well as titles and subtitles to provide information about the data source. 
+
+
+Exercise #4 - What does the plot below tell you about the relationship between city and highway mpg? Why is 'coord_fixed()' important? What does 'geom_abline()' do?
+
+>> It tells us that there is a direct relationship between mpg driving at cities and highways, as expected. 
+'coord_fixed()' forces a specified ratio between the physical representation of data units on the axes, and it is important because it can be used to alter the visualization for the reader, improve their visual perception or even manipulate the interpretation.   
+'geom_abline()' adds reference lines (sometimes called rules) to a plot, either horizontal, vertical, or diagonal (specified by slope and intercept). These are useful for annotating plots.
+
+```{r Section 3.9.1 Question 4}
+
+ggplot(data = mpg, mapping = aes (x= cty, y = hwy)) + geom_point() + geom_abline() + coord_fixed()
+ggplot(data = mpg, mapping = aes (x= cty, y = hwy)) + geom_point() + geom_abline() + coord_fixed(ratio = 2)
+
+
+```
+
+
+SECTION 4.4 | EXERCISES #1 AND #2 
+
+Exercise # 1 - Why does this code not work? >> Because the point in the i is missing when calling it, hence the variable is not found. 
+
+```{r Section 4.4 Exercise 1}
+
+my_variable <- 10
+my_variable
+
+```
+
+Exercise # 2 - Tweak each of the following R commands so that they run correctly. 
+
+```{r Section 4.4 Exercise 2}
+
+library(tidyverse)
+
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy))
+
+filter(mpg, cyl == 8)
+filter(diamonds, carat > 3)
+
+```
+
+Section 5.2.4: #1, #3 and #4 only.
+
+Exercise #1 - Find all flights that
+
+Had an arrival delay of two or more hours
+Flew to Houston (IAH or HOU)
+Were operated by United, American, or Delta
+Departed in summer (July, August, and September)
+Arrived more than two hours late, but didn’t leave late
+Were delayed by at least an hour, but made up over 30 minutes in flight
+Departed between midnight and 6am (inclusive)
+
+
+```{r Section 5.2.1 Exercise #1}
+filter(flights, arr_delay>=2)
+filter(flights, dest == "IAH" | dest == "HOU")
+filter(flights, carrier == "AA" | dest == "DL")
+filter(flights, month >= 7 & month <= 9)
+filter(flights, dep_delay == 0 & arr_delay > 2)
+
+```
+
 
