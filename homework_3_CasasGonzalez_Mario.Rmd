@@ -9,11 +9,13 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
 My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
 
 ```{r load_packages, warning=FALSE, message=FALSE}
 library(mdsr)
 library(tidyverse)
+library(nycflights13)
 
 ```
 
@@ -129,13 +131,39 @@ Were delayed by at least an hour, but made up over 30 minutes in flight
 Departed between midnight and 6am (inclusive)
 
 
-```{r Section 5.2.1 Exercise #1}
-filter(flights, arr_delay>=2)
+```{r Section 5.2.4 Exercise #1}
+
+filter(flights, arr_delay >=2)
 filter(flights, dest == "IAH" | dest == "HOU")
 filter(flights, carrier == "AA" | dest == "DL")
 filter(flights, month >= 7 & month <= 9)
-filter(flights, dep_delay == 0 & arr_delay > 2)
+filter(flights, arr_delay > 2 & dep_delay == 0)
+filter(flights, dep_delay >= 1 & dep_delay-arr_delay > 0.5)
+filter(flights, dep_time >= 0 & arr_time <= 600)
 
 ```
+
+Exercise #3 - How many flights have a missing dep_time? What other variables are missing? What might these rows represent?
+
+>> There seems to be 8,255 flights without a departure time. 
+Other variables missing for these flights are dep_delay, arr_time, arr_delay and air_time. These rows seem to represent cancelled flights.   
+
+
+
+```{r Section 5.2.4 Exercise #3}
+
+no_dep_time <- flights %>% filter(is.na(dep_time))
+
+
+```
+
+Exercise #4 - Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE & NA not missing? Can you figure out the general rule? (NA * 0 is a tricky counterexample!)
+
+>> Because NA represents an unknown value and almost any operation involving an unknown value will also be unknown. 
+
+Section 5.4.1: #1 and #3 only.
+
+Exercise #1 - 
+
 
 
