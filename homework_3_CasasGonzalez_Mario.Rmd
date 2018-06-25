@@ -23,7 +23,7 @@ SECTION 3.8.1 ALL EXERCISES
 
 Question 1 - What is the problem with this plot? How could you improve it? 
 
->> The problem with it is overplotting. You can improve it by using the position adjustment "jitter". This adds certain randomness to the values, which results in spreading multiple points with the same value out. 
+>> The problem with it is overplotting. You can improve it by using the position adjustment "jitter". This adds certain randomness to the values, which results in spreading multiple points with the same value out..
 
 
 ```{r Section 3.8.1 Question 1}
@@ -163,7 +163,29 @@ Exercise #4 - Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FA
 
 Section 5.4.1: #1 and #3 only.
 
-Exercise #1 - 
+Exercise #1 - Brainstorm as many ways as possible to select dep_time, dep_delay, arr_time, and arr_delay from flights.
+
+```{r Section 5.4.1 Exercise #1}
+
+select (flights, dep_time, dep_delay, arr_time, arr_delay)
+select (flights, -(year:day), -(carrier:time_hour), -sched_dep_time, -sched_arr_time)
+select (flights, starts_with("dep"), starts_with("arr"))
+
+```
+
+Exercise #3 - What does the one_of() function do? Why might it be helpful in conjunction with this vector?
+
+>> One_of allows you to select variables based on their names, among those in a particular character vector, in this case 'vars'.   
+
+```{r Section 5.4.1 Exercise #3}
+
+vars <- c("year", "month", "day", "dep_delay","arr_delay")
+select(flights, one_of(vars))
+
+```
+
+
+
 
 
 
