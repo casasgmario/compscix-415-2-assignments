@@ -1,0 +1,63 @@
+---
+title: "COMPSCIX 415.2 Homework 3"
+author: "Mario Casas Gonzalez"
+date: "June 24, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
+
+```{r load_packages, warning=FALSE, message=FALSE}
+library(mdsr)
+library(tidyverse)
+
+```
+
+SECTION 3.8.1 ALL EXERCISES
+
+Question 1 - What is the problem with this plot? How could you improve it? 
+
+>> The problem with it is overplotting. You can improve it by using the position adjustment "jitter". This adds certain randomness to the values, which results in spreading multiple points with the same value out. 
+
+
+```{r Section 3.8.1 Question 1}
+
+ggplot (data=mpg, mapping= aes (x=cty, y = hwy)) + geom_point()
+ggplot (data=mpg, mapping= aes (x=cty, y = hwy)) + geom_point() + geom_jitter()
+
+
+```
+
+
+Question 2 - What parameters of geom_jitter() control the amount of jittering?
+
+>>'width' and 'height' control the amount of horizontal and vertical jitter. 
+
+
+```{r Section 3.8.1 Question 2}
+
+?geom_jitter
+
+
+```
+
+Question 3 - Compare and contrast geom_jitter() with geom_count()
+
+>> geom_cout() counts the number of observations at each location, then maps the count to point area. 
+
+```{r Section 3.8.1 Question 3}
+
+?geom_count
+ggplot (data=mpg, mapping= aes (x=cty, y = hwy)) + geom_point() + geom_jitter()
+ggplot (data=mpg, mapping= aes (x=cty, y = hwy)) + geom_point() + geom_count()
+
+```
+
+
+Question 4 - What's the default position for geom_boxplot()? Create a visualisation of the mpg dataset that demonstrate it. 
+
+
