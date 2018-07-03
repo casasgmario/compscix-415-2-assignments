@@ -1,0 +1,22 @@
+---
+title: "COMPSCIX 415.2 Homework 4"
+author: "Mario Casas Gonzalez"
+date: "July 3, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
+
+```{r load_packages, warning=FALSE, message=FALSE, echo = FALSE}
+library(mdsr)
+library(tidyverse)
+library(nycflights13)
+
+```
+
+
+
