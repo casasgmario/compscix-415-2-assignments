@@ -22,6 +22,7 @@ library(nycflights13)
 ### Exercise #2 Come up with another approach that will give you the same output as not_cancelled %>% count(dest) and not_cancelled %>% count(tailnum, wt = distance) (without using count()).
 
 
+
 ```{r 5.6.7-2, warning=FALSE, message=FALSE, echo = FALSE}
 
 not_cancelled <- flights %>% filter(!is.na(dep_delay), !is.na(arr_delay))
@@ -31,6 +32,24 @@ not_cancelled %>% group_by(tailnum) %>% summarise(n = sum(distance))
 
 ```
 
+
+### Exercise #4 Look at the number of cancelled flights per day. Is there a pattern? Is the proportion of cancelled flights related to the average delay?
+
+As shown in the plots below, cancellations tend to peak around the beginning of the second weekd of the month. The higher the number of cancellations, the lower the average delay. 
+
+
+```{r 5.6.7-4, warning=FALSE, message=FALSE, echo = FALSE}
+
+cancelled <- flights %>% filter(is.na(dep_time))
+
+cancelled_by_day <- flights %>% group_by(day) %>% summarize(cancelled=sum(is.na(dep_time)),avg_delay=(mean(!is.na(dep_delay))))
+
+ggplot(data=cancelled_by_day, mapping=aes(x=day,y=cancelled)) +geom_point() +geom_smooth()
+
+ggplot(data=cancelled_by_day, mapping=aes(x=day,y=cancelled, size=avg_delay)) +geom_point() +geom_smooth()
+
+
+```
 
 
 
