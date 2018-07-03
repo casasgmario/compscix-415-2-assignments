@@ -17,6 +17,19 @@ library(tidyverse)
 library(nycflights13)
 
 ```
+## Section 5.6.7: #2, #4 and #6 only. Extra Credit: Do #5
+
+# Exercise #2 Come up with another approach that will give you the same output as not_cancelled %>% count(dest) and not_cancelled %>% count(tailnum, wt = distance) (without using count()).
+
+
+```{r load_packages, warning=FALSE, message=FALSE, echo = FALSE}
+
+not_cancelled %>% group_by(dest) %>% summarise(n = sum(!is.na(dep_time)))
+not_cancelled %>% group_by(tailnum) %>% summarise(n = sum(distance))
+
+
+```
+
 
 
 
