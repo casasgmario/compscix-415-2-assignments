@@ -52,4 +52,12 @@ ggplot(data=cancelled_by_day, mapping=aes(x=day,y=cancelled, size=avg_delay)) +g
 ```
 
 
+### Exercise #6 What does the sort argument to count() do. When might you use it?
+
+
+```{r 5.6.7-6, warning=FALSE, message=FALSE, echo = FALSE}
+
+cancelled %>% count (day,sort=TRUE)
+
+```
 
