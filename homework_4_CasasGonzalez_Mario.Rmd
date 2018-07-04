@@ -139,7 +139,20 @@ mypeople %>% spread (key = key, value = weight)
 
 ```
 
+### Exercise #4 - Tidy the simple tibble below. Do you need to spread or gather it? What are the variables?
 
+The variables are pregnant status and gender. You need to gather it. 
+
+```{r 12.3.3-4, warning=FALSE, message=FALSE, echo = FALSE}
+
+preg <- tribble(
+  ~pregnant, ~male, ~female,
+  "yes",     NA,    10,
+  "no",      20,    12
+)
+
+
+```
 
 
 
