@@ -17,7 +17,7 @@ library(tidyverse)
 library(nycflights13)
 
 ```
-## Section 5.6.7: #2, #4 and #6 only. Extra Credit: Do #5
+## Section 5.6.7: #2, #4 and #6 only. 
 
 ### Exercise #2 Come up with another approach that will give you the same output as not_cancelled %>% count(dest) and not_cancelled %>% count(tailnum, wt = distance) (without using count()).
 
@@ -54,10 +54,92 @@ ggplot(data=cancelled_by_day, mapping=aes(x=day,y=cancelled, size=avg_delay)) +g
 
 ### Exercise #6 What does the sort argument to count() do. When might you use it?
 
+It sorts the output by default in a decreasing order. 
 
 ```{r 5.6.7-6, warning=FALSE, message=FALSE, echo = FALSE}
 
 cancelled %>% count (day,sort=TRUE)
 
 ```
+
+
+## Section 10.5: #1, #2, #3 and #6 only 
+
+### Exercise #1 How can you tell if an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).
+
+Tibbles are different from data frames in how they print to the screen, as they only print enough data that can fit on the screen and they show the variable types.
+
+```{r 10.5-1, warning=FALSE, message=FALSE, echo = FALSE}
+
+mtcars
+
+```
+
+### Exercise #2 Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?
+
+
+
+```{r 10.5-2, warning=FALSE, message=FALSE, echo = TRUE}
+
+df <- data.frame(abc = 1, xyz = "a")
+df$x
+df[, "xyz"]
+df[, c("abc", "xyz")]
+
+mytibble <- as_tibble(df)
+mytibble$x
+mytibble[, "xyz"]
+mytibble[, c("abc", "xyz")]
+
+
+```
+
+
+### Exercise #3 - If you have the name of a variable stored in an object, e.g. var <- "mpg", how can you extract the reference variable from a tibble?
+
+You can use the command var$variable. 
+
+
+### Exercise #6 - What option controls how many additional column names are printed at the footer of a tibble?
+
+You can explicitly and control the number of rows (n) and the width of the display >> width = x 
+
+
+## Section 12.3.3: #2, #3 and #4 only
+
+
+### Exercise #2 Why does this code fail?
+
+Because you need to add '' to the year number so R can parse it correctly. 
+
+```{r 12.3.3-2, warning=FALSE, message=FALSE, echo = TRUE}
+
+
+table4a %>% gather(`1999`, `2000`, key = "year", value = "cases")
+
+```
+
+### Exercise #3 Why does spreading this tibble fail? How could you add a new column to fix the problem?
+
+It fails because we need the number of columns to equal the number of variables, hence we need to add a new column, which we can do with the command mypeople <- people %>% mutate (weight=value)
+
+```{r 12.3.3-3, warning=FALSE, message=FALSE, echo = FALSE}
+
+people <- tribble(
+  ~name,             ~key,    ~value,
+  #-----------------|--------|------
+  "Phillip Woods",   "age",       45,
+  "Phillip Woods",   "height",   186,
+  "Phillip Woods",   "age",       50,
+  "Jessica Cordero", "age",       37,
+  "Jessica Cordero", "height",   156
+)
+mypeople <- people %>% mutate (weight=value)
+mypeople %>% spread (key = key, value = weight)
+
+```
+
+
+
+
 
