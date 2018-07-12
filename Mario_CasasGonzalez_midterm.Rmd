@@ -7,9 +7,39 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 ```
 
-## R Markdown
+
+## RStudio and R Markdown (3 points)
+
+1. Use markdown headers in your document to clearly separate each midterm question and add a table of contents to your document.
+
+## The tidyverse packages (3 points)
+
+#1. Can you name which package is associated with each task below?
+
+Plotting - 'ggplot2' is the enhanced data visualization package we have been using for the most part. The 'plot' verb is included in Base R graphics.  
+
+Data munging/wrangling - 'dplyr' is the package intended for data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges such as mutate, select, filter, summarise and arrange. Overall, 'tidyr' helps tidy the data. 
+
+Reshaping (spreading and gathering) data - this is included in the 'tidyr' package, part of the 'tidyverse'. 
+
+Importing/exporting data -
+
+2. Now can you name two functions that you’ve used from each package that you listed above for these tasks?
+
+Plotting -
+Data munging/wrangling -
+Reshaping data -
+Importing/exporting data -
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(dplyr)
+library(mdsr)
+```
+
 
 
 ```{r pressure, echo=FALSE}
