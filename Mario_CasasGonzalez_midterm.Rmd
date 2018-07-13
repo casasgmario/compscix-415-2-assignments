@@ -97,6 +97,51 @@ glimpse(rail_trail_csv)
 ```
 
 
+###Visualization (6 points)
+
+##1. Critique this graphic: give only three examples of what is wrong with this graphic. Be concise.
+
+A) Poor and irrelevant use of color coding 
+B) Not showing gender distribution per age group 
+C) No % information shown 
+
+##2. Reproduce this graphic using the diamonds data set.
+
+```{r Visualization2, echo=TRUE}
+ggplot(data = diamonds, mapping = aes(x = cut, y = carat, fill=color)) + geom_boxplot(position='identity') + coord_flip()
+```
+
+## 3. The previous graphic is not very useful. We can make it much more useful by changing one thing about it. Make the change and plot it again.
+
+```{r Visualization3, echo=TRUE}
+
+ggplot(data = diamonds, mapping = aes(x = cut, y = carat, fill=color)) + geom_boxplot(position='identity', alpha=0.1) + coord_flip()
+
+```
+
+###Data munging and wrangling (6 points) 
+
+##1. Is this data “tidy”? If yes, leave it alone and go to the next problem. If no, make it tidy. Note: this data set is called table2 and is available in the tidyverse package. It should be ready for you to use after you’ve loaded the tidyverse package.
+
+```{r DatMunging1, echo=TRUE}
+table2_scattered <- table2 %>% spread(key=type, value=count)
+table2_scattered
+```
+
+##2 Create a new column in the diamonds data set called price_per_carat that shows the price of each diamond per carat (hint: divide). Only show me the code, not the output.
+
+```{r DatMunging2, echo=TRUE}
+diamonds_caratprice <- mutate(diamonds, price_per_carat=price/carat)
+
+```
+
+##3 For each cut of diamond in the diamonds data set, how many diamonds, and what proportion, have a price > 10000 and a carat < 1.5? There are several ways to get to an answer, but your solution must use the data wrangling verbs from the tidyverse in order to get credit. • Do the results make sense? Why? • Do we need to be wary of any of these numbers? Why?
+
+```{r DatMunging3, echo=TRUE}
+diamonds_expensive_small <- diamonds %>% filter(price>1000 & carat < 1.5)
+diamonds_expensive_small <- diamonds_expensive_small %>% group_by(cut) %>% summarize(count=n())
+mutate(diamonds_expensive_small,proportion=count/(sum(diamonds_expensive_small$count)))
+```
 
 
 
