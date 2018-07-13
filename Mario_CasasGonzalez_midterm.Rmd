@@ -2,11 +2,15 @@
 title: "COMPSCIX 415.2 Homework 5/Midterm"
 author: "Mario Casas Gonzalez"
 date: "July 12, 2018"
-output: html_document
+output: 
+  html_document:
+    toc: TRUE
+    theme: united 
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
 
 ```
 
@@ -17,22 +21,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## The tidyverse packages (3 points)
 
-#1. Can you name which package is associated with each task below?
+###1. Can you name which package is associated with each task below?
 
 Plotting - 'ggplot2' is the enhanced data visualization package we have been using for the most part. The 'plot' verb is included in Base R graphics.  
 
 Data munging/wrangling - 'dplyr' is the package intended for data manipulation, providing a consistent set of verbs that help you solve the most common data manipulation challenges such as mutate, select, filter, summarise and arrange. Overall, 'tidyr' helps tidy the data. 
 
-Reshaping (spreading and gathering) data - this is included in the 'tidyr' package, part of the 'tidyverse'. 
+Reshaping (spreading and gathering) data - this is included in the 'tidyr' package, part of the 'tidyverse' set. 
 
-Importing/exporting data -
+Importing/exporting data - the 'readr' package is used for importing and exporting data. 
 
-2. Now can you name two functions that you’ve used from each package that you listed above for these tasks?
 
-Plotting -
-Data munging/wrangling -
-Reshaping data -
-Importing/exporting data -
+###2. Now can you name two functions that you’ve used from each package that you listed above for these tasks?
+
+Plotting - we have used 'ggplot', 'geom_point' and many other variations of 'geom_'
+Data munging/wrangling - mutate, select, filter, summarise and arrange
+Reshaping data - we have used 'gather()' and 'separate()'
+Importing/exporting data - we've used 'read_delim' and 'write_csv'
 
 ```{r, warning = FALSE, message = FALSE}
 library(tidyverse)
@@ -41,8 +46,57 @@ library(mdsr)
 ```
 
 
+##R Basics (1.5 points) 
 
-```{r pressure, echo=FALSE}
+###1. Fix this code with the fewest number of changes possible so it works:
+
+My_data.name___is.too00ooLong! <- c( 1 , 2 , 3 )
+
+```{r R-Basics1, echo=TRUE}
+My_data.name___is.too00ooLong <- c( 1 , 2 , 3 )
 
 ```
+
+###2. Fix this code so it works:
+my_string <- C('has', 'an', 'error', 'in', 'it)
+
+```{r R-Basics2, echo=TRUE}
+my_string <- c('has', 'an', 'error', 'in', 'it')
+
+```
+
+###3. Look at the code below and comment on what happened to the values in the vector.
+my_vector <- c(1, 2, '3', '4', 5)
+my_vector
+
+What happened is that the values were stored as characters rather than numeric, because of the '' symbols in 3 and 4. 
+
+```{r R-Basics3, echo=TRUE}
+my_vector <- c(1, 2, '3', '4', 5)
+is.character(my_vector)
+my_vector <- c(1, 2, 3, 4, 5)
+is.numeric(my_vector)
+
+```
+
+##Data import/export (3 points)
+
+###1. Download the rail_trail.txt file from Canvas (in the Midterm Exam section) and successfully import it into R. Prove that it was imported successfully by including your import code and taking a glimpse of the result.
+
+```{r DataImportExport1, echo=TRUE}
+rail_trail <- read_delim('rail_trail.txt', delim = '|')
+glimpse(rail_trail)
+```
+
+###2. Export the file into a comma-separated file and name it “rail_trail.csv”. Make sure you define the path correctly so that you know where it gets saved. Then reload the file. Include your export and import code and take another glimpse.
+
+```{r DataImportExport2, echo=TRUE}
+write_csv(rail_trail, 'rail_trail.csv')
+rail_trail_csv <- read_csv('rail_trail.csv')
+glimpse(rail_trail_csv)
+```
+
+
+
+
 
