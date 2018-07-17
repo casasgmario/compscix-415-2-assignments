@@ -53,3 +53,92 @@ ggplot(Whickham_cat,aes(smoker))+geom_bar(mapping=aes(fill=outcome), position="f
 ```
 
 
+## Exercise 2 
+
+### 1. Generate a random sample of size n = 10000 from a gamma(1,2) distribution and plot a histogram or density curve. Use the code below to help you get your sample.
+
+```{r Exercise2.1, echo=TRUE}
+ n <- 10000
+gamma_samp <- tibble(x = rgamma(n, shape = 1, scale = 2))
+gamma_samp %>% ggplot() + geom_histogram(aes(x = x), binwidth = 0.1) + theme_bw()
+
+```
+
+###2. What is the mean and standard deviation of your sample? They should both be close to 2 because for a gamma distribution:
+
+Indeed, the mean is 1.989866, standard deviation 2.0402.
+
+```{r Exercise2.2, echo=TRUE}
+mean_samp <- gamma_samp %>% .[['x']] %>% mean()
+mean_samp
+sd_samp <- gamma_samp %>% .[['x']] %>% sd()
+sd_samp
+
+```
+
+### 3. Pretend the distribution of our population of data looks like the plot above. Now take a sample of size n = 30 from a Gamma(1,2) distribution, plot the histogram or density curve, and calculate the mean and standard deviation.
+
+
+```{r Exercise2.3, echo=TRUE}
+gamma_samp_30 <- gamma_samp %>% sample_n(30)
+gamma_samp_30 %>% ggplot() + geom_histogram(aes(x = x), binwidth = 0.1) + theme_bw()
+mean_samp_30 <- gamma_samp_30 %>% .[['x']] %>% mean()
+mean_samp_30
+sd_samp_30 <- gamma_samp_30 %>% .[['x']] %>% sd()
+sd_samp_30
+
+```
+
+
+###4. Take a sample of size n = 30, again from the Gamma(1,2) distribution, calculate the mean, and assign it to a vector named mean_samp. Repeat this 10000 times!!!! The code below might help.
+
+```{r Exercise2.4, echo=TRUE}
+mean_samp <- rep(NA, 10000)
+for(i in 1:10000) {
+g_samp <- rgamma(30, shape = 1, scale = 2)
+mean_samp[i] <- mean(g_samp)
+}
+mean_samp <- tibble(mean_samp)
+
+```
+
+###5. Make a histogram of your collection of means from above (mean_samp).
+```{r Exercise2.5, echo=TRUE}
+mean_samp %>% ggplot() + geom_histogram(mapping=aes(x=mean_samp),binwidth = 0.05)
+
+```
+
+### 6. Calculate the mean and standard deviation of all of your sample means.
+
+```{r Exercise2.6, echo=TRUE}
+series_mean <- mean_samp %>% .[['mean_samp']] %>% mean()
+series_mean
+series_sd <- mean_samp %>% .[['mean_samp']] %>% sd()
+series_sd
+
+```
+
+### 7. Did anything surprise you about your answers to #6?
+
+Yes, standard deviation decreased significantly. 
+
+
+### 8. Repeat #4-#6, but now with a sample of size n = 300 instead. Do your results match up well with the theorem?
+
+Yes, as you can see below the standard deviation is reduced to 0.1173 as we increase the sample size from 30 to 300. 
+
+```{r Exercise2.8, echo=TRUE}
+mean_samp <- rep(NA, 10000)
+for(i in 1:10000) {
+g_samp <- rgamma(300, shape = 1, scale = 2)
+mean_samp[i] <- mean(g_samp)
+}
+mean_samp <- tibble(mean_samp)
+mean_samp %>% ggplot() + geom_histogram(mapping=aes(x=mean_samp),binwidth = 0.01)
+series_mean <- mean_samp %>% .[['mean_samp']] %>% mean()
+series_mean
+series_sd <- mean_samp %>% .[['mean_samp']] %>% sd()
+series_sd
+
+
+```
