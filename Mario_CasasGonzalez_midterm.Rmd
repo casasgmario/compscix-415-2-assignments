@@ -10,7 +10,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
+library(tidyverse)
 
 ```
 
@@ -145,7 +145,7 @@ Yes, the results show a correlation between the quality of the cut and the numbe
 
 
 ```{r DatMunging3, echo=TRUE}
-diamonds_expensive_small <- diamonds %>% filter(price>1000 & carat < 1.5)
+diamonds_expensive_small <- diamonds %>% filter(price>10000 & carat < 1.5)
 diamonds_expensive_small <- diamonds_expensive_small %>% group_by(cut) %>% summarize(count=n())
 mutate(diamonds_expensive_small,proportion=count/(sum(diamonds_expensive_small$count)))
 ```

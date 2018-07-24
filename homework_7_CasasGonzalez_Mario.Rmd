@@ -1,0 +1,86 @@
+---
+title: "COMPSCIX 415.2 Homework 7"
+author: "Mario Casas Gonzalez"
+date: "July 24, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
+
+```{r load_packages, warning=FALSE, message=FALSE}
+library(mdsr)
+library(tidyverse)
+library (readr)
+```
+
+###Exercise 1 - Load the train.csv dataset into R. How many observations and columns are there?
+
+There is 1,460 observation and 81 variables i.e. columns in the 'train.csv' dataset. 
+
+```{r Exercise1, warning=FALSE, ECHO=TRUE}
+train_dataset <- read_csv('C:/Users/mcgonzalez/Documents/Training/Berkeley/COMPSCI X415.2 - 002 Introduction to Data Science/Session 7 Homework/train.csv')
+glimpse(train_dataset)
+
+```
+
+###Exercise 2
+
+####• Visualize the distribution of SalePrice.
+####• Visualize the covariation between SalePrice and Neighborhood.
+####• Visualize the covariation between SalePrice and OverallQual.
+
+
+```{r Exercise2}
+train_dataset %>% ggplot(aes(x=SalePrice))+geom_histogram(binwidth = 10000)
+
+```
+
+
+Question 2 - Unique region values extracted: 
+
+ [1] "Europe/Andorra"                 "Asia/Dubai"                    
+ [3] "Asia/Kabul"                     "America/Antigua"               
+ [5] "America/Anguilla"               "Europe/Tirane"                 
+ [7] "Asia/Yerevan"                   "Africa/Luanda"                 
+ [9] "America/Argentina/Buenos_Aires" "America/Argentina/Cordoba"     
+[11] "America/Argentina/Salta"        "America/Argentina/Tucuman"     
+[13] "America/Argentina/San_Juan"   
+
+
+```{r Extract Data the tidy way}
+country_col <- select(WorldCities, country)
+country_col <- WorldCities %>% select(country)
+WorldCities %>% select(country) %>% unique()
+
+```
+
+Question 3 - Unique country codes extracted:
+
+1        AD
+3        AE
+15       AF
+65       AG
+66       AI
+67       AL
+87       AM
+104      AO
+131      AR
+
+```{r Visualize it}
+
+WorldCities %>% ggplot(aes(x = population)) + geom_histogram()
+WorldCities %>% ggplot(aes(x = population)) + geom_histogram() + xlab('City Population')
+WorldCities %>% ggplot(aes(x = population)) + geom_histogram() + 
+  xlab('# People') + ylab ('# Cities') + ggtitle('My Question 4 Histogram')
+
+
+```
+
+
+QUestion 4 - plot generated above
+
+
