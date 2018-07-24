@@ -2,22 +2,27 @@
 title: "COMPSCIX 415.2 Homework 7"
 author: "Mario Casas Gonzalez"
 date: "July 24, 2018"
-output: html_document
+output: 
+  html_document:
+    toc: TRUE
+    theme: united 
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-My Github repository for my assignments can be found at this URL: https://github.com/casasgmario/compscix-415-2-assignments 
 
 ```{r load_packages, warning=FALSE, message=FALSE}
 library(mdsr)
 library(tidyverse)
 library (readr)
+library(broom)
 ```
 
-###Exercise 1 - Load the train.csv dataset into R. How many observations and columns are there?
+###Exercise 1 
+
+####Load the train.csv dataset into R. How many observations and columns are there?
 
 There is 1,460 observation and 81 variables i.e. columns in the 'train.csv' dataset. 
 
@@ -34,53 +39,92 @@ glimpse(train_dataset)
 ####• Visualize the covariation between SalePrice and OverallQual.
 
 
-```{r Exercise2}
+```{r Exercise2, ECHO='TRUE'}
 train_dataset %>% ggplot(aes(x=SalePrice))+geom_histogram(binwidth = 10000)
-
-```
-
-
-Question 2 - Unique region values extracted: 
-
- [1] "Europe/Andorra"                 "Asia/Dubai"                    
- [3] "Asia/Kabul"                     "America/Antigua"               
- [5] "America/Anguilla"               "Europe/Tirane"                 
- [7] "Asia/Yerevan"                   "Africa/Luanda"                 
- [9] "America/Argentina/Buenos_Aires" "America/Argentina/Cordoba"     
-[11] "America/Argentina/Salta"        "America/Argentina/Tucuman"     
-[13] "America/Argentina/San_Juan"   
-
-
-```{r Extract Data the tidy way}
-country_col <- select(WorldCities, country)
-country_col <- WorldCities %>% select(country)
-WorldCities %>% select(country) %>% unique()
-
-```
-
-Question 3 - Unique country codes extracted:
-
-1        AD
-3        AE
-15       AF
-65       AG
-66       AI
-67       AL
-87       AM
-104      AO
-131      AR
-
-```{r Visualize it}
-
-WorldCities %>% ggplot(aes(x = population)) + geom_histogram()
-WorldCities %>% ggplot(aes(x = population)) + geom_histogram() + xlab('City Population')
-WorldCities %>% ggplot(aes(x = population)) + geom_histogram() + 
-  xlab('# People') + ylab ('# Cities') + ggtitle('My Question 4 Histogram')
+traindataset_Neighborhood_lm <- lm(SalePrice ~ Neighborhood, data = train_dataset)
+tidy(traindataset_Neighborhood_lm)
+train_dataset %>% ggplot () + geom_boxplot(aes(x=reorder(Neighborhood,SalePrice),y=SalePrice)) + xlab('Neighborhood')
+train_dataset %>% ggplot () + geom_boxplot(aes(x=reorder(OverallQual,SalePrice),y=SalePrice)) + xlab('OverallQual')
 
 
 ```
 
+### Exercise 3
 
-QUestion 4 - plot generated above
+#####• take a look at the coefficient,
+#####• compare the coefficient to the average value of SalePrice, and
+#####• take a look at the R-squared.
+
+The coefficient for Sale Price versus Overall Quality are Intercept -96206, and 45,436. 
+
+The average of Sale Price is 180,921. 
+
+R squared is 0.626. 
+
+
+```{r ECHO='TRUE'}
+lm(formula=SalePrice ~ OverallQual, data = train_dataset)
+SalePrice <- train_dataset$SalePrice
+mean(SalePrice)
+glance(lm(formula=SalePrice ~ OverallQual, data = train_dataset))
+
+```
+
+
+### Exercise 4
+
+• What kind of relationship will these features have with our target? 
+  
+  -'GrLivArea' shows living area square feet so should have a positive correlation with the Sale Price. Same thing should happen with 'OverallQual' as this variable is an indication of the overall material and finish quality.  
+  
+• Can the relationship be estimated linearly?
+
+  They should be. 
+
+• Are these good features, given the problem we are trying to solve?
+
+ I would say the living space size and overall quality should be helpful in predicting the Sale Price. The p value shown below is low. 
+
+```{r}
+lm(formula=SalePrice ~ GrLivArea + OverallQual + Neighborhood, data=train_dataset) %>% tidy()
+lm(formula=SalePrice ~ GrLivArea + OverallQual + Neighborhood, data=train_dataset) %>% glance()
+
+
+```
+
+
+• How would you interpret the coefficients on GrLivArea and OverallQual? 
+
+They mean for every relative unit we increase the living space or the Overall Quality, the price of the house would increase by 55.56 and 20,951 respectively.  
+
+• How would you interpret the coefficient on NeighborhoodBrkSide?
+
+It means that, comparatively, when leaving the other 2 factors living space and overall quality constant, the price of the house is lower on this neighborhood than the avarage across the city.   
+
+• Are the features significant? • Are the features practically significant?
+
+These features seem to have a practical correlation with the Sale Price, and this is also proved by the low P. value.  
+
+• Is the model a good fit?
+
+As indicated by R squared adjusted of 0.783, Yes.  
+
+### Exercise 6
+
+```{r Exercise6, ECHO='TRUE'}
+
+sim1a <- tibble(x = rep(1:10, each = 3), y = x * 1.5 + 6 + rt(length(x), df = 2))
+sim1a_lm <- lm(formula= y ~ x, data=sim1a)
+lm_x <- lm(formula= y ~ x, data=sim1a)
+glance(lm_x)
+
+```
+
+What do you notice about the model’s coefficient on x and the R-squared values? 
+
+The rsquared values vary widely for different runs of the code, even though the x value seems to remain around the 1.4 mark. 
+
+
+
 
 
