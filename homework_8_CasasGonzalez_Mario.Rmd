@@ -1,0 +1,52 @@
+---
+title: "COMPSCIX 415.2 Homework 8"
+author: "Mario Casas Gonzalez"
+date: "July 31, 2018"
+output: 
+  html_document:
+    toc: TRUE
+    theme: united 
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r load_packages, warning=FALSE, message=FALSE}
+library(mdsr)
+library(rgdal)
+library(ggmap)
+library(leaflet)
+library(tidyverse)
+library (readr)
+library(broom)
+library(tseries)
+```
+
+###Exercise 1 
+
+#### Create an R function that takes as its input argument a city name and creates a slippy leaflet map as its output. The leaflet map should already be zoomed in onto the city that is input into the function and should contain markers for each of the bike station locations, and each marker should show the number of bikes when hovered over by the mouse cursor (see example below). Feel free to add your own flourishes to the map.
+
+####On your final html document I want to see the code and one slippy map for any of the given cities. Do not attempt to put multiple slippy maps on your html file - it may break.
+
+####Name your function map_it. To pull the data, you will use the fromJSON function (set the flatten argument to TRUE).
+
+
+```{r Exercise1, warning=FALSE, ECHO=TRUE}
+cities <- c('Luxembourg', 'Dublin', 'Brisbane', 'Seville', 'Stockholm', 'Ljubljana')
+
+map_it <- function (city_name) {
+  leaflet() %>% addTiles()
+  city <-city_name
+  city_geo <- geocode(city)
+  map <- leaflet() %>% setView(city_geo[[1]], city_geo[[2]],zoom=12) %>% addTiles()
+  return ()
+}
+
+map_it(cities)
+
+```
+
+
+
