@@ -15,7 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r load_packages, warning=FALSE, message=FALSE}
 library(mdsr)
+library(rjson)
 library(rgdal)
+library(jsonlite)
 library(ggmap)
 library(leaflet)
 library(tidyverse)
@@ -34,17 +36,23 @@ library(tseries)
 
 
 ```{r Exercise1, warning=FALSE, ECHO=TRUE}
-cities <- c('Luxembourg', 'Dublin', 'Brisbane', 'Seville', 'Stockholm', 'Ljubljana')
 
 map_it <- function (city_name) {
-  leaflet() %>% addTiles()
   city <-city_name
   city_geo <- geocode(city)
-  map <- leaflet() %>% setView(city_geo[[1]], city_geo[[2]],zoom=12) %>% addTiles()
-  return ()
-}
+  json_file <- paste0('https://api.jcdecaux.com/vls/v1/stations/?contract=',city, '&apiKey=7e11f4ed8b1a6f7e1bebef0545bfdabd86b70eb2')
+  json_data <- fromJSON(json_file,flatten=TRUE)
+  stations_df <-as.data.frame(json_data)
+  head(stations_df)
+  leaflet() %>% addTiles()
+  #leaflet() %>% setView(city_geo[[1]], city_geo[[2]],zoom=12) %>% addTiles()
+  leaflet() %>% setView(city_geo[[1]], city_geo[[2]],zoom=12) %>% addTiles() %>% addMarkers(stations_df$position.lng, stations_df$position.lat)
 
-map_it(cities)
+#cities <- c('Luxembourg')
+
+return ()
+}
+map_it('Seville')
 
 ```
 
