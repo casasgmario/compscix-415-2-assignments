@@ -44,15 +44,15 @@ map_it <- function (city_name) {
   json_data <- fromJSON(json_file,flatten=TRUE)
   stations_df <-as.data.frame(json_data)
   head(stations_df)
-  leaflet() %>% addTiles()
+  #leaflet() %>% addTiles()
   #leaflet() %>% setView(city_geo[[1]], city_geo[[2]],zoom=12) %>% addTiles()
-  leaflet() %>% setView(city_geo[[1]], city_geo[[2]],zoom=12) %>% addTiles() %>% addMarkers(stations_df$position.lng, stations_df$position.lat)
+  map<-leaflet() %>% setView(city_geo[[1]], city_geo[[2]],zoom=13) %>% addTiles() %>% addMarkers(stations_df$position.lng, stations_df$position.lat)
 
 #cities <- c('Luxembourg')
 
-return ()
+return (map)
 }
-map_it('Seville')
+map_it('Brisbane')
 
 ```
 
