@@ -19,6 +19,9 @@ library(tidyverse)
 library(tidyverse)
 library(dplyr)
 library(mdsr)
+library(broom)
+library(readr)
+
 ```
 
 
@@ -125,5 +128,47 @@ theor_std_error <- my_sd/sqrt(samp_size)
 
 ```
 
+## Exercise 2 - Linear Regression (5 points)
 
 
+
+• Interpret the coefficient on LotArea >> For every increase of 1 sq foot in the LotArea, the prediction of the model for the Sale Price increases by 1.453, when leaving the other 2 variables fixed (Overall Quality and External Quality)
+
+• Interpret the coefficient on ExterQualGd >> For every increase of 1 unit in the ExterQualGd factor, the prediction of the model for the Sale Price decreases by 71529, when leaving the other 2 variables fixed (Lot Area and Overall Quality)
+
+
+• Compare this model to the model we fit in HW 7 with GrLivArea, OverallQual, Neighborhood. Which is the better fitting model? >> We evaluate this with the adjusted R squared value, which in this case is 0.694 versus 0.783 on the HW 7 model, hence we can infer that the old HW 7 model was a better fit. 
+
+```{r Exercise2, echo=TRUE}
+train <- read_csv("~/Training/Berkeley/COMPSCI X415.2 - 002 Introduction to Data Science/Homeworks/Final Exam/train.csv")
+(my_lm <- lm (SalePrice ~ LotArea + OverallQual + ExterQual, data=train))
+tidy (my_lm)
+glance(my_lm)
+
+
+```
+
+
+
+## Exercise 3 - AB Testing (5 points)
+
+a. What proportion of visitors converted for each version of the webpage? > 4.15% on Version A and 10% on Version B. 
+b. Perform the AB test in R. What is the p-value for the AB test (hypothesis test of proportions)? The p-value is 1.25388e-10. 
+
+
+```{r Exercise3, echo=TRUE}
+ab_test_data <- read_csv("~/Training/Berkeley/COMPSCI X415.2 - 002 Introduction to Data Science/Homeworks/Final Exam/ab_test_data.csv")
+total_conversions <- ab_test_data %>% group_by (version) %>% summarise(total_conversions=sum(conversion))
+total_conversions %>% mutate(conversion_rates=total_conversions/2000)
+true_a <- 0.0415
+true_b <-0.1
+n_a <- 2000
+n_b <- 2000
+set.seed(10)
+samp_a <- rbinom(n = 1, size = n_a, prob = true_a)
+samp_b <- rbinom(n = 1, size = n_b, prob = true_b)
+two_prop_test <- prop.test(c(samp_a, samp_b), c(2000, 2000))
+two_prop_test$p.value
+
+
+```
