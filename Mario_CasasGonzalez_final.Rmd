@@ -65,9 +65,65 @@ for (i in 1:n) {
   my_list <- samp_fun(samp_size, samp_rate)
   sample_means[[i]] <- my_list$samp_avg
   sample_sds[[i]] <- my_list$samp_std_dev
-  i
 }
 
+```
+
+
+###Step 3
+
+```{r Exercise1-Step3, echo=TRUE}
+sample_means_df <- as_data_frame(sample_means)
+ggplot(sample_means_df, aes(x=value)) + geom_histogram()
+my_sd <- sd(sample_means)
+my_sd
+theor_std_error <- my_sd/sqrt(samp_size)
 
 
 ```
+
+###Step 4
+
+```{r Exercise1-Step4, echo=TRUE}
+
+n <- 1000 
+samp_size <- 500
+samp_rate <- 1/10000
+sample_means <- c(0)
+sample_sds <- c(0)
+
+
+for (i in 1:n) {
+  samp_size <- 50
+  samp_rate <- 1/10000
+  my_list <- samp_fun(samp_size, samp_rate)
+  sample_means[[i]] <- my_list$samp_avg
+  sample_sds[[i]] <- my_list$samp_std_dev
+}
+
+sample_means_df <- as_data_frame(sample_means)
+ggplot(sample_means_df, aes(x=value)) + geom_histogram()
+my_sd <- sd(sample_means)
+my_sd
+theor_std_error <- my_sd/sqrt(samp_size)
+
+samp_size <- 5000
+
+for (i in 1:n) {
+  samp_size <- 50
+  samp_rate <- 1/10000
+  my_list <- samp_fun(samp_size, samp_rate)
+  sample_means[[i]] <- my_list$samp_avg
+  sample_sds[[i]] <- my_list$samp_std_dev
+}
+
+sample_means_df <- as_data_frame(sample_means)
+ggplot(sample_means_df, aes(x=value)) + geom_histogram()
+my_sd <- sd(sample_means)
+my_sd
+theor_std_error <- my_sd/sqrt(samp_size)
+
+```
+
+
+
